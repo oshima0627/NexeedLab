@@ -2,18 +2,19 @@ import type { Metadata } from 'next';
 
 // Base metadata shared across pages
 const baseMetadata = {
+  metadataBase: new URL('https://nexeedlab.com'),
   title: {
     default: 'Nexeed Lab | AI & Web Development Solutions',
     template: '%s | Nexeed Lab',
   },
   description: 'Professional web application development, AI solutions, and digital services for businesses looking to innovate and grow online.',
   keywords: ['AI development', 'web application', 'website design', 'business systems', 'SEO', 'MEO'],
-  authors: [{ name: 'Nexeed Lab' }],
-  creator: 'Nexeed Lab',
+  authors: [{ name: '大島直孝' }],
+  creator: '大島直孝',
   publisher: 'Nexeed Lab',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'ja_JP',
     url: 'https://nexeedlab.com',
     siteName: 'Nexeed Lab',
     images: [

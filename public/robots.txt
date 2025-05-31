@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nexeedlab.com/sitemap.xml
+
+# Disallow admin areas (if any in the future)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /services
+Allow: /portfolio
+Allow: /about
+Allow: /blog
+Allow: /contact
+Allow: /privacy-policy
+Allow: /terms-of-service 

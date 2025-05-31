@@ -1,4 +1,4 @@
-# Nexeed Lab Frontend - 本番環境デプロイガイド
+# Nexeed Lab - Next.js フルスタックアプリケーション デプロイガイド
 
 ## 🚨 本番公開前チェックリスト
 
@@ -6,9 +6,17 @@
 
 #### 本番環境用 .env.production
 ```bash
-NEXT_PUBLIC_API_URL=https://api.yourdomain.com
-NEXT_PUBLIC_API_BASE_URL=https://api.yourdomain.com/api
+# Next.js設定
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+
+# メール送信設定（必要に応じて）
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+
+# データベース設定（将来的に追加する場合）
+# DATABASE_URL=postgresql://username:password@localhost:5432/nexeedlab
 ```
 
 ### 2. ビルド設定
@@ -17,7 +25,7 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 ```javascript
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone', // Docker用
+  // API Routesを使用するため静的エクスポートは無効
   experimental: {
     appDir: true,
   },
@@ -55,7 +63,18 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-### 3. SEO最適化
+### 3. API Routes設定
+
+#### 現在実装されているAPI
+- `/api/portfolios` - ポートフォリオデータの取得
+- `/api/contact` - お問い合わせフォームの送信
+
+#### 将来的な拡張
+- `/api/blog` - ブログ記事の管理
+- `/api/auth` - 認証機能（管理画面用）
+- `/api/admin` - 管理機能
+
+### 4. SEO最適化
 
 #### メタデータの設定
 - sitemap.xml の生成
@@ -63,7 +82,7 @@ module.exports = nextConfig;
 - Open Graph画像の最適化
 - 構造化データの追加
 
-### 4. パフォーマンス最適化
+### 5. パフォーマンス最適化
 
 #### 画像最適化
 - WebP形式への変換
@@ -76,7 +95,7 @@ npm run build
 npm run analyze # バンドルサイズ分析
 ```
 
-### 5. セキュリティ設定
+### 6. セキュリティ設定
 
 #### Content Security Policy
 ```javascript
@@ -107,11 +126,13 @@ vercel --prod
 - 環境変数の設定
 - カスタムドメインの設定
 - Analytics の有効化
+- API Routes の自動デプロイ
 
 ### Option 2: Netlify
 ```bash
 npm run build
-# dist フォルダをNetlifyにアップロード
+# .next フォルダをNetlifyにアップロード
+# Functions設定でAPI Routesをサポート
 ```
 
 ### Option 3: 自前サーバー
@@ -121,7 +142,7 @@ npm run build
 
 # PM2での起動
 npm install -g pm2
-pm2 start npm --name "nexeed-lab-frontend" -- start
+pm2 start npm --name "nexeed-lab" -- start
 ```
 
 ### Option 4: Docker
@@ -140,6 +161,8 @@ RUN npm run build
 FROM node:18-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV production
+
+# Next.js standalone output用
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
@@ -158,6 +181,7 @@ CMD ["node", "server.js"]
 ### 2. エラー監視
 - Sentry設定
 - ログ監視
+- API エラートラッキング
 
 ### 3. アクセス解析
 - Google Analytics 4
@@ -172,7 +196,7 @@ CMD ["node", "server.js"]
 ### 2. キャッシュ戦略
 - ブラウザキャッシュ
 - CDNキャッシュ
-- Service Worker
+- API レスポンスキャッシュ
 
 ### 3. 圧縮設定
 - Gzip/Brotli圧縮
@@ -181,19 +205,41 @@ CMD ["node", "server.js"]
 ## ⚠️ 注意事項
 
 ### セキュリティ
-- API キーの適切な管理
-- HTTPS の強制
-- セキュリティヘッダーの設定
+- 環境変数の適切な管理
+- API エンドポイントのレート制限
+- CORS設定の確認
 
 ### パフォーマンス
-- 画像の最適化
-- 不要なJavaScriptの削除
-- 遅延読み込みの実装
+- API Routes のレスポンス時間監視
+- データベース接続プールの設定（将来的に）
+- メモリ使用量の監視
 
-### SEO
-- メタタグの最適化
-- 構造化データの実装
-- サイトマップの生成
+### 運用
+- ログローテーション
+- バックアップ戦略
+- 障害対応手順
+
+## 📝 今後の拡張予定
+
+### データベース統合
+- PostgreSQL または MongoDB の導入
+- Prisma ORM の設定
+- データマイグレーション
+
+### 認証機能
+- NextAuth.js の導入
+- 管理画面の実装
+- ユーザー管理機能
+
+### メール送信機能
+- SendGrid または Resend の統合
+- お問い合わせ自動返信
+- 通知機能
+
+### CMS機能
+- ブログ記事の管理
+- ポートフォリオの動的管理
+- 画像アップロード機能
 
 ## 🚀 デプロイ後チェックリスト
 

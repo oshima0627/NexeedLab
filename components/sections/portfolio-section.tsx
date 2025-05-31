@@ -27,7 +27,8 @@ export function PortfolioSection() {
   useEffect(() => {
     async function fetchPortfolios() {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/portfolios`);
+        // Next.js API Routeを使用
+        const response = await fetch('/api/portfolios');
         if (response.ok) {
           const data = await response.json();
           setPortfolios(data);

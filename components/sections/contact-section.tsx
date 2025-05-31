@@ -45,7 +45,7 @@ export function ContactSection() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/contacts`, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,8 +53,9 @@ export function ContactSection() {
         body: JSON.stringify(values),
       });
 
-      if (response.ok) {
-        const result = await response.json();
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         form.reset();
         
         toast({
@@ -62,7 +63,7 @@ export function ContactSection() {
           description: "お問い合わせありがとうございます。近日中にご返信いたします。",
         });
       } else {
-        throw new Error('送信に失敗しました');
+        throw new Error(result.message || '送信に失敗しました');
       }
     } catch (error) {
       console.error('Error submitting form:', error);

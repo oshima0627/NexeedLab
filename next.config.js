@@ -7,24 +7,29 @@ const nextConfig = {
     unoptimized: true,
     domains: ['images.pexels.com']
   },
-  output: 'export',
+  // 静的エクスポートを無効化（API Routesを使用するため）
+  // output: 'export',
   trailingSlash: true,
   assetPrefix: '',
   basePath: '',
-  distDir: 'out',
-  env: {
-    NEXT_PUBLIC_API_URL: 'https://nexeed-web.com',
-    NEXT_PUBLIC_API_BASE_URL: 'https://nexeed-web.com/api'
-  },
-  webpack: (config, { isServer }) => {
-    // Disable webpack caching to prevent file system errors
+  // distDir: 'out',
+  webpack: (config, { isServer, dev }) => {
+    // Disable webpack caching completely to prevent module resolution errors
     config.cache = false;
+    
+    // Fix module resolution issues
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      path: false,
+      os: false,
+    };
     
     // Optimize memory usage
     if (!isServer) {
       config.optimization = {
         ...config.optimization,
-        minimize: true,
+        minimize: !dev,
         splitChunks: {
           chunks: 'all',
           minSize: 20000,
@@ -47,6 +52,7 @@ const nextConfig = {
         },
       };
     }
+    
     return config;
   }
 };
