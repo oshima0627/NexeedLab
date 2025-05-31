@@ -1,0 +1,216 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
+
+const formSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+});
+
+export function ContactSection() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+  
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/contacts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        form.reset();
+        
+        toast({
+          title: "メッセージを送信しました",
+          description: "お問い合わせありがとうございます。近日中にご返信いたします。",
+        });
+      } else {
+        throw new Error('送信に失敗しました');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "送信エラー",
+        description: "メッセージの送信に失敗しました。しばらく後でもう一度お試しください。",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  return (
+    <section className="py-20 bg-muted/30" id="contact">
+      <div className="container">
+        <SectionHeading
+          title="お問い合わせ"
+          description="プロジェクトのご相談はお気軽にご連絡ください。"
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <div>
+              <h3 className="text-2xl font-bold mb-4">お問い合わせ方法</h3>
+              <p className="text-muted-foreground mb-6">
+                ご質問やご相談はお気軽にご連絡ください。デジタルプロジェクトの成功をサポートいたします。
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              {[
+                { icon: Mail, label: "メール", value: "orfevre_gk_6.27@icloud.com" },
+                { icon: Phone, label: "電話", value: "08061760627" },
+                { icon: MapPin, label: "所在地", value: "大阪府門真市" },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex items-start space-x-3"
+                >
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <item.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{item.label}</h4>
+                    <p className="text-muted-foreground">{item.value}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>お名前</FormLabel>
+                        <FormControl>
+                          <Input placeholder="山田 太郎" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>メールアドレス</FormLabel>
+                        <FormControl>
+                          <Input placeholder="yamada@example.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>件名</FormLabel>
+                      <FormControl>
+                        <Input placeholder="お問い合わせ内容の件名" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>メッセージ</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="プロジェクトやご質問の詳細をご記入ください..."
+                          className="min-h-[150px]" 
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <span className="flex items-center">
+                      送信中 <span className="ml-2 animate-spin">⟳</span>
+                    </span>
+                  ) : (
+                    <span className="flex items-center">
+                      メッセージを送信 <Send className="ml-2 h-4 w-4" />
+                    </span>
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
