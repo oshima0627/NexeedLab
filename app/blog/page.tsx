@@ -21,64 +21,70 @@ const formatDate = (dateString: string) => {
 
 const posts = [
   {
-    id: "ai-development-trends-2025",
-    title: "2025年に注目すべきAI開発トレンド",
-    excerpt: "2025年以降の開発領域を形作る新興AIテクノロジーと手法について探ります。",
+    id: "ai-job-transformation",
+    title: "AI時代の職業変革：影響を受ける仕事と新しく生まれる仕事の完全ガイド",
+    excerpt: "AI技術により2030年までに8億人の労働者が影響を受けると予測される中、どの職業が変化し、どんな新しい仕事が生まれるのかを詳しく解説します。",
     image: "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    date: "2025-01-15",
+    date: "2025-06-01",
     author: "大島直孝",
-    category: "AI開発",
-    link: "/blog/ai-development-trends-2025",
+    category: "AI・未来の働き方",
+    link: "https://note.com/oshima0627/n/n4cf99f78bc89",
+    isExternal: true,
   },
   {
-    id: "responsive-design-best-practices",
-    title: "モダンウェブサイトのレスポンシブデザインベストプラクティス",
-    excerpt: "あらゆるデバイスで最適なユーザー体験を提供する、真にレスポンシブなウェブサイトを作成するための必須テクニックとアプローチを学びます。",
+    id: "claude-code-beginner",
+    title: "【完全初心者向け】ClaudeCodeって何？プログラミング未経験でも理解できる解説",
+    excerpt: "プログラミング未経験者でもAIの力を借りてアプリケーション開発ができる時代。ClaudeCodeを使った学習体験談をお話しします。",
     image: "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    date: "2024-12-10",
+    date: "2025-06-04",
     author: "大島直孝",
-    category: "Webデザイン",
-    link: "/blog/responsive-design-best-practices",
+    category: "プログラミング学習",
+    link: "https://note.com/oshima0627/n/n63175335e288",
+    isExternal: true,
   },
   {
-    id: "business-intelligence-guide",
-    title: "ビジネスインテリジェンスソリューション完全ガイド",
-    excerpt: "最新のBIツールと戦略を活用して、データを意思決定に活かせるインサイトに変換する方法を解説します。",
+    id: "claude-code-business-success",
+    title: "Claude Code企業導入成功事例：売上10億円増加を実現した革新的ビジネス活用法",
+    excerpt: "Claude Code導入により大幅なコスト削減と効率向上を実現した企業の成功事例を詳しく紹介します。",
     image: "https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    date: "2024-11-28",
+    date: "2025-06-07",
     author: "大島直孝",
-    category: "業務システム",
-    link: "/blog/business-intelligence-guide",
+    category: "ビジネス活用",
+    link: "https://note.com/oshima0627/n/ncb5796b4fbaa",
+    isExternal: true,
   },
   {
-    id: "seo-strategies-2025",
-    title: "2025年に効果的なSEO戦略",
-    excerpt: "最新の検索エンジンアルゴリズムとユーザー行動トレンドに合わせた、実績のあるSEOテクニックで競合他社をリードしましょう。",
+    id: "ai-writing-tools-guide",
+    title: "AIライティングツール完全活用ガイド：ブログ・SNS投稿を効率化する方法",
+    excerpt: "進化し続けるAIライティングツールを活用して、様々なプラットフォームでのコンテンツ作成を効率化する方法を解説します。",
     image: "https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    date: "2024-11-15",
+    date: "2025-06-10",
     author: "大島直孝",
-    category: "SEO",
-    link: "/blog/seo-strategies-2025",
+    category: "コンテンツ制作",
+    link: "https://note.com/oshima0627/n/n9645b4e62b4d",
+    isExternal: true,
   },
   {
-    id: "chatbot-development-guide",
-    title: "インテリジェントチャットボット開発ガイド",
-    excerpt: "カスタマーエクスペリエンスを向上させ、サポートを効率化する高度な対話インターフェースを作成するためのステップバイステップアプローチ。",
+    id: "claude-tips-and-tricks",
+    title: "【Claude初心者が知らないと損する10の裏技】効率10倍アップの使い方",
+    excerpt: "Claude初心者でも効率を劇的に向上させることができる10の裏技テクニックを実例付きで紹介します。",
     image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    date: "2024-10-22",
+    date: "2025-06-13",
     author: "大島直孝",
-    category: "AI開発",
-    link: "/blog/chatbot-development-guide",
+    category: "AI活用術",
+    link: "https://note.com/oshima0627/n/n093de137d490",
+    isExternal: true,
   },
   {
-    id: "mobile-app-performance",
-    title: "ユーザー定着率を高めるモバイルアプリのパフォーマンス最適化",
-    excerpt: "モバイルアプリケーションをスムーズに動作させ、優れたユーザー体験を提供するためのテクニックとベストプラクティス。",
+    id: "digital-transformation-guide",
+    title: "中小企業のDX成功事例：デジタル変革で売上300%アップした方法",
+    excerpt: "中小企業がデジタルトランスフォーメーションを成功させ、大幅な業績向上を実現するための具体的な手法とプロセスを解説します。",
     image: "https://images.pexels.com/photos/193004/pexels-photo-193004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    date: "2024-10-05",
+    date: "2025-06-16",
     author: "大島直孝",
-    category: "モバイル開発",
-    link: "/blog/mobile-app-performance",
+    category: "DX・デジタル変革",
+    link: "https://note.com/oshima0627/n/note-url-placeholder",
+    isExternal: true,
   },
 ];
 
@@ -135,7 +141,11 @@ export default function BlogPage() {
                 </div>
                 
                 <Button asChild className="w-fit group">
-                  <Link href={featuredPost.link}>
+                  <Link 
+                    href={featuredPost.link}
+                    target={featuredPost.isExternal ? "_blank" : "_self"}
+                    rel={featuredPost.isExternal ? "noopener noreferrer" : undefined}
+                  >
                     記事を読む
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
@@ -166,7 +176,13 @@ export default function BlogPage() {
                 </div>
                 
                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                  <Link href={post.link}>{post.title}</Link>
+                  <Link 
+                    href={post.link}
+                    target={post.isExternal ? "_blank" : "_self"}
+                    rel={post.isExternal ? "noopener noreferrer" : undefined}
+                  >
+                    {post.title}
+                  </Link>
                 </h3>
                 
                 <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
