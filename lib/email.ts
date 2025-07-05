@@ -23,8 +23,14 @@ export async function sendContactEmail(data: EmailData) {
       SMTP_HOST: process.env.SMTP_HOST,
       SMTP_PORT: process.env.SMTP_PORT,
       SMTP_USER: process.env.SMTP_USER,
-      SMTP_PASS: process.env.SMTP_PASS ? 'set' : 'not set'
+      SMTP_PASS: process.env.SMTP_PASS ? 'set' : 'not set',
+      NODE_ENV: process.env.NODE_ENV
     });
+
+    // 環境変数チェック
+    if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      throw new Error('必要な環境変数が設定されていません');
+    }
     // 管理者への通知メール
     const adminMailOptions = {
       from: process.env.SMTP_USER,

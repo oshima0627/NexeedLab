@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 // Base metadata shared across pages
 const baseMetadata = {
-  metadataBase: new URL('https://nexeedlab.com'),
+  metadataBase: new URL('https://www.nexeed-web.com'),
   title: {
     default: 'Nexeed Lab | AI & Web Development Solutions',
     template: '%s | Nexeed Lab',
@@ -15,7 +15,7 @@ const baseMetadata = {
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
-    url: 'https://nexeedlab.com',
+    url: 'https://www.nexeed-web.com',
     siteName: 'Nexeed Lab',
     images: [
       {
