@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { sendContactEmail } from '@/lib/email';
 
 // バリデーションスキーマ
 const contactSchema = z.object({
@@ -16,18 +17,17 @@ export async function POST(request: NextRequest) {
     // バリデーション
     const validatedData = contactSchema.parse(body);
     
-    // ここで実際のメール送信処理を行う
-    // 現在はコンソールにログを出力（開発用）
-    console.log('お問い合わせを受信しました:', {
+    // メール送信処理
+    const emailResult = await sendContactEmail({
       name: validatedData.name,
       email: validatedData.email,
       subject: validatedData.subject,
       message: validatedData.message,
-      timestamp: new Date().toISOString(),
     });
-    
-    // 実際のプロダクションでは、ここでメール送信サービス（SendGrid、Resend等）を使用
-    // または、データベースに保存する処理を追加
+
+    if (!emailResult.success) {
+      throw new Error(emailResult.error || 'メール送信に失敗しました');
+    }
     
     return NextResponse.json(
       { 

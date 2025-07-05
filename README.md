@@ -2,12 +2,12 @@
 
 ## 概要
 
-Nexeed Labの公式ウェブサイトです。Next.js 13のApp Routerを使用したフルスタック構成で、フロントエンドとバックエンドの両方を統合しています。
+Nexeed Labの公式ウェブサイトです。Next.js 14のApp Routerを使用したフルスタック構成で、フロントエンドとバックエンドの両方を統合しています。メール送信機能を実装し、お問い合わせフォームから直接連絡を受け取ることができます。
 
 ## 技術スタック
 
 ### フロントエンド
-- **Next.js 13** - App Router使用
+- **Next.js 14** - App Router使用
 - **React 18** - UI構築
 - **TypeScript** - 型安全性
 - **Tailwind CSS** - スタイリング
@@ -17,6 +17,7 @@ Nexeed Labの公式ウェブサイトです。Next.js 13のApp Routerを使用�
 
 ### バックエンド
 - **Next.js API Routes** - サーバーサイドAPI
+- **Nodemailer** - メール送信機能
 - **Zod** - バリデーション
 - **TypeScript** - 型安全性
 
@@ -71,7 +72,7 @@ Nexeed Labの公式ウェブサイトです。Next.js 13のApp Routerを使用�
 ```
 
 ### POST /api/contact
-お問い合わせフォームの送信を処理します。
+お問い合わせフォームの送信を処理し、管理者への通知メールとお客様への自動返信メールを送信します。
 
 **リクエスト例:**
 ```json
@@ -119,11 +120,11 @@ npm run dev
 # 開発環境用
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# メール送信設定（将来的に追加）
-# SMTP_HOST=smtp.gmail.com
-# SMTP_PORT=587
-# SMTP_USER=your-email@gmail.com
-# SMTP_PASS=your-app-password
+# メール送信設定
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
 ```
 
 ## 開発
@@ -160,12 +161,18 @@ npm run lint
 - **Netlify** - 静的サイトホスティング
 - **自前サーバー** - Docker対応
 
+## 実装済み機能
+
+- [x] **メール送信機能** - Nodemailerを使用したGmail SMTP経由での送信
+- [x] **お問い合わせフォーム** - バリデーション付きフォーム
+- [x] **自動返信メール** - お客様への確認メール送信
+- [x] **管理者通知** - 新しいお問い合わせの即座な通知
+
 ## 今後の拡張予定
 
 - [ ] データベース統合（PostgreSQL/MongoDB）
 - [ ] 認証機能（NextAuth.js）
 - [ ] 管理画面の実装
-- [ ] メール送信機能（SendGrid/Resend）
 - [ ] CMS機能
 - [ ] ブログ記事の動的管理
 - [ ] 画像アップロード機能
@@ -176,6 +183,6 @@ npm run lint
 
 ## お問い合わせ
 
-- **メール**: orfevre_gk_6.27@icloud.com
+- **メール**: oshima6.27@gmail.com
 - **電話**: 08061760627
 - **所在地**: 大阪府門真市  

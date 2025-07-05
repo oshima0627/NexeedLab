@@ -83,7 +83,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <div className="mt-4">
               <p>Nexeed Lab</p>
-              <p>メール：orfevre_gk_6.27@icloud.com</p>
+              <p>メール：oshima6.27@gmail.com</p>
               <p>電話：08061760627</p>
               <p>所在地：大阪府門真市</p>
             </div>

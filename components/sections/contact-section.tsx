@@ -102,7 +102,7 @@ export function ContactSection() {
             
             <div className="space-y-4">
               {[
-                { icon: Mail, label: "メール", value: "orfevre_gk_6.27@icloud.com" },
+                { icon: Mail, label: "メール", value: "oshima6.27@gmail.com" },
                 { icon: Phone, label: "電話", value: "08061760627" },
                 { icon: MapPin, label: "所在地", value: "大阪府門真市" },
               ].map((item, index) => (
