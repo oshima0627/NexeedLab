@@ -19,18 +19,34 @@ export interface EmailData {
 
 export async function sendContactEmail(data: EmailData) {
   try {
+    console.log('=== メール送信開始 ===');
+    console.log('実行環境:', process.env.NODE_ENV);
+    console.log('実行時刻:', new Date().toISOString());
+    
     console.log('環境変数確認:', {
       SMTP_HOST: process.env.SMTP_HOST,
       SMTP_PORT: process.env.SMTP_PORT,
       SMTP_USER: process.env.SMTP_USER,
-      SMTP_PASS: process.env.SMTP_PASS ? 'set' : 'not set',
-      NODE_ENV: process.env.NODE_ENV
+      SMTP_PASS: process.env.SMTP_PASS ? `設定済み(${process.env.SMTP_PASS.length}文字)` : '未設定',
+      NODE_ENV: process.env.NODE_ENV,
+      VERCEL: process.env.VERCEL,
+      VERCEL_ENV: process.env.VERCEL_ENV
     });
 
     // 環境変数チェック
     if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-      throw new Error('必要な環境変数が設定されていません');
+      const missingVars = [];
+      if (!process.env.SMTP_HOST) missingVars.push('SMTP_HOST');
+      if (!process.env.SMTP_USER) missingVars.push('SMTP_USER');
+      if (!process.env.SMTP_PASS) missingVars.push('SMTP_PASS');
+      
+      const errorMsg = `必要な環境変数が設定されていません: ${missingVars.join(', ')}`;
+      console.error('❌', errorMsg);
+      throw new Error(errorMsg);
     }
+
+    console.log('✅ 環境変数チェック完了');
+    console.log('📧 Nodemailer設定開始...');
     // 管理者への通知メール
     const adminMailOptions = {
       from: process.env.SMTP_USER,
@@ -72,18 +88,53 @@ export async function sendContactEmail(data: EmailData) {
       `,
     };
 
-    // メール送信
-    console.log('管理者メール送信開始...');
-    const adminResult = await transporter.sendMail(adminMailOptions);
-    console.log('管理者メール送信結果:', adminResult);
-    
-    console.log('お客様メール送信開始...');
-    const clientResult = await transporter.sendMail(clientMailOptions);
-    console.log('お客様メール送信結果:', clientResult);
+    // SMTP接続テスト
+    console.log('🔗 SMTP接続テスト開始...');
+    await transporter.verify();
+    console.log('✅ SMTP接続テスト成功');
 
+    // メール送信
+    console.log('📤 管理者メール送信開始...');
+    console.log('送信先:', process.env.SMTP_USER);
+    console.log('件名:', adminMailOptions.subject);
+    
+    const adminResult = await transporter.sendMail(adminMailOptions);
+    console.log('✅ 管理者メール送信成功:', {
+      messageId: adminResult.messageId,
+      accepted: adminResult.accepted,
+      rejected: adminResult.rejected
+    });
+    
+    console.log('📤 お客様メール送信開始...');
+    console.log('送信先:', data.email);
+    
+    const clientResult = await transporter.sendMail(clientMailOptions);
+    console.log('✅ お客様メール送信成功:', {
+      messageId: clientResult.messageId,
+      accepted: clientResult.accepted,
+      rejected: clientResult.rejected
+    });
+
+    console.log('🎉 全てのメール送信完了');
     return { success: true };
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('❌ メール送信エラー:', error);
+    console.error('エラータイプ:', typeof error);
+    console.error('エラー名:', error instanceof Error ? error.name : 'Unknown');
+    console.error('エラーメッセージ:', error instanceof Error ? error.message : String(error));
+    console.error('エラースタック:', error instanceof Error ? error.stack : 'No stack trace');
+    
+    // Gmail固有のエラーチェック
+    if (error instanceof Error) {
+      if (error.message.includes('Invalid login')) {
+        console.error('🔐 認証エラー: Gmailのユーザー名またはアプリパスワードが間違っています');
+      } else if (error.message.includes('Connection timeout')) {
+        console.error('⏰ タイムアウトエラー: SMTP接続がタイムアウトしました');
+      } else if (error.message.includes('ENOTFOUND')) {
+        console.error('🌐 DNS解決エラー: SMTPサーバーが見つかりません');
+      }
+    }
+    
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
   }
 }

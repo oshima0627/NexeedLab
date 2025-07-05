@@ -40,20 +40,40 @@ export default function ContactPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log(values);
-      setIsSubmitting(false);
-      form.reset();
-      
-      toast({
-        title: "メッセージを送信しました",
-        description: "お問い合わせありがとうございます。近日中にご返信いたします。",
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
       });
-    }, 1000);
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        form.reset();
+        
+        toast({
+          title: "メッセージを送信しました",
+          description: "お問い合わせありがとうございます。近日中にご返信いたします。",
+        });
+      } else {
+        throw new Error(result.message || '送信に失敗しました');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "送信エラー",
+        description: "メッセージの送信に失敗しました。しばらく後でもう一度お試しください。",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
