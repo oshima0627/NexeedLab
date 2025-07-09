@@ -6,8 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = createMetadata({
-  title: '実績紹介',
-  description: 'AIアプリケーション、Web開発プロジェクト、業務システムの実績をご紹介します。',
+  title: '実績紹介 - AIアプリケーション・Web開発プロジェクト',
+  description: 'Nexeed LabのAIアプリケーション、Web開発プロジェクト、業務システム、SEO・MEO対策の実績事例を順次公開中。大阪を拠点に革新的なデジタルソリューションを提供します。',
+  keywords: ['実績紹介', 'AIアプリケーション', 'Web開発', '業務システム', 'SEO対策', 'プロジェクト事例'],
+  openGraph: {
+    title: '実績紹介 - AIアプリケーション・Web開発プロジェクト | Nexeed Lab',
+    description: 'AIアプリケーション、Web開発プロジェクト、業務システム、SEO・MEO対策の実績事例を順次公開中。大阪を拠点に革新的なデジタルソリューションを提供します。',
+    url: 'https://nexeedlab.com/portfolio',
+  },
 });
 
 const categories = [

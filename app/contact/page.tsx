@@ -18,6 +18,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { StructuredData } from "@/components/seo/structured-data";
+import { localBusinessStructuredData } from "@/lib/structured-data";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "お名前は2文字以上で入力してください。" }),
@@ -77,12 +79,14 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="py-16">
-      <div className="container">
-        <SectionHeading
-          title="お問い合わせ"
-          description="プロジェクトのご相談はお気軽にご連絡ください。"
-        />
+    <>
+      <StructuredData data={localBusinessStructuredData} />
+      <div className="py-16">
+        <div className="container">
+          <SectionHeading
+            title="お問い合わせ"
+            description="プロジェクトのご相談はお気軽にご連絡ください。"
+          />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
           <div>
@@ -191,7 +195,8 @@ export default function ContactPage() {
             </Form>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

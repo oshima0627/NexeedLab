@@ -1,12 +1,15 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://nexeedlab.com/sitemap.xml
+# Disallow API routes
+Disallow: /api/
 
 # Disallow admin areas (if any in the future)
-# Disallow: /admin/
-# Disallow: /api/
+Disallow: /admin/
+
+# Disallow temporary files
+Disallow: /.next/
+Disallow: /node_modules/
 
 # Allow important pages
 Allow: /
@@ -16,4 +19,10 @@ Allow: /about
 Allow: /blog
 Allow: /contact
 Allow: /privacy-policy
-Allow: /terms-of-service 
+Allow: /terms-of-service
+
+# Sitemap
+Sitemap: https://nexeedlab.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1 

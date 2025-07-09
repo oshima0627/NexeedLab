@@ -9,10 +9,18 @@ import {
   CheckCircle2
 } from "lucide-react";
 import Image from "next/image";
+import { StructuredData } from "@/components/seo/structured-data";
+import { servicesStructuredData } from "@/lib/structured-data";
 
 export const metadata = createMetadata({
-  title: 'サービス',
-  description: 'デジタル時代におけるビジネスの成功を支援する、包括的なAIおよびWeb開発サービスをご紹介します。',
+  title: 'サービス一覧 - AI開発・Web制作・業務システム',
+  description: 'Nexeed LabのAI開発、Webアプリケーション開発、Webサイト制作、業務システム開発、SEO・MEO対策サービスをご紹介。大阪を拠点に最新技術でビジネスを支援します。',
+  keywords: ['AI開発', 'Webアプリケーション開発', 'Webサイト制作', '業務システム開発', 'SEO対策', 'MEO対策', '大阪', 'システム開発'],
+  openGraph: {
+    title: 'サービス一覧 - AI開発・Web制作・業務システム | Nexeed Lab',
+    description: 'AI開発、Webアプリケーション開発、Webサイト制作、業務システム開発、SEO・MEO対策サービスをご紹介。大阪を拠点に最新技術でビジネスを支援します。',
+    url: 'https://nexeedlab.com/services',
+  },
 });
 
 const services = [
@@ -95,13 +103,15 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div className="py-16 space-y-24">
-      <div className="container">
-        <SectionHeading
-          title="サービス"
-          description="最新技術を活用した包括的なデジタルソリューションで、デジタル時代におけるビジネスの成功を支援します。"
-        />
-      </div>
+    <>
+      <StructuredData data={servicesStructuredData} />
+      <div className="py-16 space-y-24">
+        <div className="container">
+          <SectionHeading
+            title="サービス"
+            description="最新技術を活用した包括的なデジタルソリューションで、デジタル時代におけるビジネスの成功を支援します。"
+          />
+        </div>
 
       {services.map((service, index) => (
         <section key={service.id} id={service.id} className="py-16">
@@ -144,6 +154,7 @@ export default function ServicesPage() {
           </div>
         </section>
       ))}
-    </div>
+      </div>
+    </>
   );
 }
