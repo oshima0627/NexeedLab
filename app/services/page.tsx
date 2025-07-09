@@ -19,7 +19,7 @@ export const metadata = createMetadata({
   openGraph: {
     title: 'サービス一覧 - AI開発・Web制作・業務システム | Nexeed Lab',
     description: 'AI開発、Webアプリケーション開発、Webサイト制作、業務システム開発、SEO・MEO対策サービスをご紹介。大阪を拠点に最新技術でビジネスを支援します。',
-    url: 'https://nexeedlab.com/services',
+    url: 'https://www.nexeed-web.com/services',
   },
 });
 

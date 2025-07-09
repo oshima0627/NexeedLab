@@ -22,7 +22,7 @@ Allow: /privacy-policy
 Allow: /terms-of-service
 
 # Sitemap
-Sitemap: https://nexeedlab.com/sitemap.xml
+Sitemap: https://www.nexeed-web.com/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1 

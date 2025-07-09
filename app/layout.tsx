@@ -11,21 +11,24 @@ import { organizationStructuredData, websiteStructuredData } from '@/lib/structu
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nexeedlab.com'),
+  metadataBase: new URL('https://www.nexeed-web.com'),
   title: {
-    default: 'Nexeed Lab | AIとWeb開発ソリューション | 大阪のプロフェッショナルサービス',
+    default: 'Nexeed Lab - 大阪のAI・Web開発プロフェッショナル | 株式会社ネクシードラボ公式サイト',
     template: '%s | Nexeed Lab'
   },
-  description: 'AIを活用したWebアプリケーション開発、Webサイト制作、業務システム開発のプロフェッショナルサービス。大阪を拠点に、企業のデジタル化を支援します。',
-  keywords: ['AI開発', 'Webアプリケーション', 'Webサイト制作', '業務システム', 'SEO対策', 'MEO対策', '大阪', 'プログラミング', 'システム開発', 'デジタル化'],
-  authors: [{ name: '大島直孝', url: 'https://nexeedlab.com' }],
+  description: 'Nexeed Lab（ネクシードラボ）は大阪を拠点とするAI開発・Webアプリケーション開発・システム構築の専門企業です。最新技術でお客様のビジネス課題を解決し、デジタル変革を支援します。無料相談受付中。',
+  keywords: ['Nexeed Lab', 'ネクシードラボ', 'AI開発', 'Webアプリケーション開発', 'システム開発', 'Web制作', '大阪', 'デジタル変革', 'DX支援', 'プログラミング会社'],
+  authors: [{ name: '大島直孝', url: 'https://www.nexeed-web.com' }],
   creator: '大島直孝',
   publisher: 'Nexeed Lab',
   category: 'technology',
+  alternates: {
+    canonical: 'https://www.nexeed-web.com',
+  },
   openGraph: {
-    title: 'Nexeed Lab | AIとWeb開発ソリューション',
-    description: 'AIを活用したWebアプリケーション開発、Webサイト制作、業務システム開発のプロフェッショナルサービス',
-    url: 'https://nexeedlab.com',
+    title: 'Nexeed Lab - 大阪のAI・Web開発プロフェッショナル',
+    description: 'Nexeed Lab（ネクシードラボ）は大阪を拠点とするAI開発・Webアプリケーション開発・システム構築の専門企業です。最新技術でお客様のビジネス課題を解決し、デジタル変革を支援します。',
+    url: 'https://www.nexeed-web.com',
     siteName: 'Nexeed Lab',
     locale: 'ja_JP',
     type: 'website',
@@ -34,19 +37,22 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Nexeed Lab - AIとWeb開発ソリューション',
+        alt: 'Nexeed Lab - 大阪のAI・Web開発プロフェッショナル',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nexeed Lab | AIとWeb開発ソリューション',
-    description: 'AIを活用したWebアプリケーション開発、Webサイト制作、業務システム開発のプロフェッショナルサービス',
+    title: 'Nexeed Lab - 大阪のAI・Web開発プロフェッショナル',
+    description: 'Nexeed Lab（ネクシードラボ）は大阪を拠点とするAI開発・Webアプリケーション開発・システム構築の専門企業です。',
     images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
     follow: true,
+    'max-snippet': -1,
+    'max-image-preview': 'large',
+    'max-video-preview': -1,
     googleBot: {
       index: true,
       follow: true,
@@ -57,6 +63,9 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'your-google-site-verification-code',
+  },
+  other: {
+    'google-site-verification': 'your-google-site-verification-code',
   },
 };
 

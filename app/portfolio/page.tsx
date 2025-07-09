@@ -12,7 +12,7 @@ export const metadata = createMetadata({
   openGraph: {
     title: '実績紹介 - AIアプリケーション・Web開発プロジェクト | Nexeed Lab',
     description: 'AIアプリケーション、Web開発プロジェクト、業務システム、SEO・MEO対策の実績事例を順次公開中。大阪を拠点に革新的なデジタルソリューションを提供します。',
-    url: 'https://nexeedlab.com/portfolio',
+    url: 'https://www.nexeed-web.com/portfolio',
   },
 });
 

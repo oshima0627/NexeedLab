@@ -13,12 +13,12 @@ import { organizationStructuredData } from "@/lib/structured-data";
 
 export const metadata = createMetadata({
   title: '会社概要 - 企業理念と価値観',
-  description: 'Nexeed Labの企業理念、価値観、AIとWeb開発ソリューションへの情燁をご紹介。大阪を拠点に、最新技術で企業のデジタル化を支援します。',
-  keywords: ['会社概要', '企業理念', 'AI開発', 'Web開発', 'デジタル化', '大阪', 'システム開発'],
+  description: '大阪を拠点とするAI・システム開発企業の企業理念、価値観、サービスへの情燁をご紹介。最新技術で企業のデジタル化を支援します。',
+  keywords: ['会社概要', '企業理念', 'AI開発企業', 'Web開発企業', 'デジタル化', '大阪', 'システム開発企業'],
   openGraph: {
-    title: '会社概要 - 企業理念と価値観 | Nexeed Lab',
-    description: 'Nexeed Labの企業理念、価値観、AIとWeb開発ソリューションへの情燁をご紹介。大阪を拠点に、最新技術で企業のデジタル化を支援します。',
-    url: 'https://nexeedlab.com/about',
+    title: '会社概要 - 企業理念と価値観',
+    description: '大阪を拠点とするAI・システム開発企業の企業理念、価値観、サービスへの情燁をご紹介。',
+    url: 'https://www.nexeed-web.com/about',
   },
 });
 

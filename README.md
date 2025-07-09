@@ -220,7 +220,7 @@ npm run lint
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Nexeed Lab",
-  "url": "https://nexeedlab.com",
+  "url": "https://www.nexeed-web.com",
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+81-80-6176-0627",
